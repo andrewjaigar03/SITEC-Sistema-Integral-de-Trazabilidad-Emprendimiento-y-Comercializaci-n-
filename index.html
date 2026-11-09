@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITEC - Piedecuesta, Santander</title>
+    <style>
+        :root {
+            --primary: #1b4d3e;
+            --primary-light: #2e7d32;
+            --secondary: #e67e22;
+            --accent: #25d366;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-muted: #7f8c8d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAV */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a, nav button {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active, nav button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-admin-nav {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-badge-active {
+            background-color: var(--secondary) !important;
+            color: white !important;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(27, 77, 62, 0.85), rgba(46, 125, 50, 0.85)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .admin-banner {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #ffeeba;
+            display: none;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        /* TABS CONTENT */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* INVENTARIO */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .inventory-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-reset {
+            background-color: #c0392b;
+            margin-top: 10px;
+        }
+        .btn-reset:hover {
+            background-color: #e74c3c;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: var(--primary);
+        }
+
+        .btn-action {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-right: 5px;
+        }
+
+        /* CATÁLOGO */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .edit-img-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-body {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .product-producer {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-meta {
+            font-size: 0.8rem;
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1eb954;
+        }
+
+        /* CAPACITACIÓN */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-container {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--primary-light);
+            height: 100%;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .delete-course-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* EQUIPO Y PROYECTO */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            background: #ffffff;
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .team-member strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .edit-team-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(27, 77, 62, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .edit-team-btn:hover {
+            background: rgba(27, 77, 62, 0.2);
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        /* CONTROL DE VISIBILIDAD ADMIN */
+        .admin-only {
+            display: none !important;
+        }
+
+        body.is-admin .admin-only {
+            display: block !important;
+        }
+        body.is-admin tr.admin-only, body.is-admin td.admin-only, body.is-admin button.admin-only {
+            display: inline-block !important;
+        }
+        body.is-admin th.admin-only {
+            display: table-cell !important;
+        }
+        body.is-admin button.delete-course-btn, body.is-admin button.edit-team-btn {
+            display: flex !important;
+        }
+        body.is-admin button.edit-img-btn {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="adminBanner" class="admin-banner">
+        🔑 Modo Administrador Activo — Puedes editar integrantes, capacitaciones, imágenes y lotes.
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <span class="logo-icon">🌿</span>
+            <div class="logo-text">
+                <h1>SITEC</h1>
+                <span>Piedecuesta • Santander</span>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" onclick="switchTab('catalog', event)">🛒 Catálogo Local</a></li>
+                <li><a href="#" class="nav-link" onclick="switchTab('inventory', event)">📦 Mi Inventario</a></li>
+                <li><a href="#" class="nav-link" onclick="switchTab('training', event)">🎓 Capacitación</a></li>
+                <li><a href="#" class="nav-link" onclick="switchTab('team', event)">👥 Equipo Proyecto</a></li>
+                <li><button id="adminBtn" class="btn-admin-nav" onclick="toggleAdmin()">🔐 Acceso Admin</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Plataforma Integral de Trazabilidad y Comercialización</h2>
+        <p>Impulsando el crecimiento y fortalecimiento digital de los pequeños productores y emprendedores de Piedecuesta, Santander.</p>
+    </section>
+
+    <div class="container">
+
+        <!-- MÓDULO C2: CATÁLOGO DIGITAL -->
+        <div id="catalog" class="tab-content active">
+            <h3 class="section-title">🛒 Catálogo de Productos y Emprendimientos Locales</h3>
+            
+            <div class="filter-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar producto, productor o vereda..." onkeyup="filterProducts()">
+                </div>
+                <div class="category-buttons">
+                    <button class="cat-btn active" onclick="filterCategory('todos', this)">Todos</button>
+                    <button class="cat-btn" onclick="filterCategory('Agrícola', this)">🌱 Agrícola</button>
+                    <button class="cat-btn" onclick="filterCategory('Artesanías', this)">🎨 Artesanías</button>
+                    <button class="cat-btn" onclick="filterCategory('Agroindustria', this)">🍯 Agroindustria</button>
+                </div>
+            </div>
+
+            <div class="catalog-grid" id="catalogGrid"></div>
+        </div>
+
+        <!-- MÓDULO C1: INVENTARIO -->
+        <div id="inventory" class="tab-content">
+            <h3 class="section-title">📦 Panel del Productor - Gestión de Inventario y Trazabilidad</h3>
+            
+            <div class="inventory-grid">
+                <div class="card">
+                    <h4 style="margin-bottom: 1rem; color: var(--primary);">Registrar Nuevo Producto / Lote</h4>
+                    <form id="productForm" onsubmit="addProduct(event)">
+                        <div class="form-group">
+                            <label>Nombre del Producto</label>
+                            <input type="text" id="pName" required placeholder="Ej. Cereal Integral">
+                        </div>
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select id="pCategory" required>
+                                <option value="Agrícola">Agrícola</option>
+                                <option value="Artesanías">Artesanías</option>
+                                <option value="Agroindustria">Agroindustria</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Productor / Emprendimiento</label>
+                            <input type="text" id="pProducer" required placeholder="Ej. Cerezos del Hato">
+                        </div>
+                        <div class="form-group">
+                            <label>Vereda / Ubicación</label>
+                            <input type="text" id="pLocation" required placeholder="Ej. Vereda El Hato">
+                        </div>
+                        <div class="form-group">
+                            <label>Código de Lote (Trazabilidad)</label>
+                            <input type="text" id="pLot" required placeholder="Ej. LOT-2026-005">
+                        </div>
+                        <div class="form-group">
+                            <label>Cantidad Disponible (Stock)</label>
+                            <input type="number" id="pStock" required placeholder="Ej. 50">
+                        </div>
+                        <div class="form-group">
+                            <label>Precio Estimado ($ COP)</label>
+                            <input type="number" id="pPrice" required placeholder="Ej. 12000">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono de Contacto (WhatsApp)</label>
+                            <input type="tel" id="pPhone" required placeholder="3001234567">
+                        </div>
+                        <div class="form-group">
+                            <label>URL de la Imagen del Producto</label>
+                            <input type="url" id="pImg" required placeholder="https://...">
+                        </div>
+                        <button type="submit" class="btn">➕ Guardar y Publicar en Catálogo</button>
+                    </form>
+                    
+                    <button onclick="clearData()" class="btn btn-reset admin-only">🔄 Restablecer Datos de Fábrica (Admin)</button>
+                </div>
+
+                <div class="card">
+                    <h4 style="margin-bottom: 1rem; color: var(--primary);">Inventario Registrado</h4>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lote</th>
+                                    <th>Producto</th>
+                                    <th>Ubicación</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th class="admin-only">Acciones Admin</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÓDULO C3: CENTRO DE FORTALECIMIENTO DIGITAL -->
+        <div id="training" class="tab-content">
+            <h3 class="section-title">🎓 Centro de Fortalecimiento Digital para Emprendedores</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Módulo de capacitación continua para potenciar las habilidades digitales y comerciales de los productores de Piedecuesta.</p>
+            
+            <div class="card admin-only" style="margin-bottom: 2rem; border-left: 5px solid var(--secondary);">
+                <h4 style="color: var(--primary); margin-bottom: 1rem;">➕ Agregar Nueva Capacitación (Panel Admin)</h4>
+                <form id="courseForm" onsubmit="addCourse(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Título del Módulo / Curso</label>
+                            <input type="text" id="cTitle" required placeholder="Ej. Módulo 4: Finanzas Básicas">
+                        </div>
+                        <div class="form-group">
+                            <label>Progreso Inicial (%)</label>
+                            <input type="number" id="cProgress" min="0" max="100" required placeholder="Ej. 50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción del Curso</label>
+                        <textarea id="cDesc" rows="2" required placeholder="Breve resumen de lo que aprenderá el emprendedor..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado del Curso</label>
+                        <select id="cStatus" required>
+                            <option value="✔ En curso">✔ En curso</option>
+                            <option value="🎉 Certificado">🎉 Certificado</option>
+                            <option value="⏳ En progreso">⏳ En progreso</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="background-color: var(--secondary);">Publicar Capacitación</button>
+                </form>
+            </div>
+
+            <div class="courses-grid" id="coursesGrid"></div>
+        </div>
+
+        <!-- MÓDULO EQUIPO -->
+        <div id="team" class="tab-content">
+            <h3 class="section-title">👥 Equipo de Desarrollo y Gestión del Proyecto</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Información del grupo colaborativo y actores institucionales del proyecto <strong>SITEC</strong> para el curso Proyecto de Ingeniería II (UNAD).</p>
+            
+            <div class="team-grid" id="teamGrid"></div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Instituciones Aliadas y Soporte</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    • <strong>Tutor Académico:</strong> Jesús Alfonso Cuacés Arrieta (UNAD)<br>
+                    • <strong>Aliados Estratégicos:</strong> Alcaldía de Piedecuesta (Secretaría de Desarrollo Económico) y Cámara de Comercio de Bucaramanga.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>SITEC - Sistema Integral de Trazabilidad, Emprendimiento y Comercialización © 2026</p>
+        <p>Proyecto de Ingeniería II • Universidad Nacional Abierta y a Distancia (UNAD) • Piedecuesta, Santander</p>
+    </footer>
+
+    <script>
+        const defaultProducts = [
+            {
+                id: 1,
+                name: "Café Especial Orgánico Mesa de los Santos",
+                category: "Agroindustria",
+                producer: "Finca El Cafetal - Pedro Gómez",
+                location: "Vereda Sevilla, Piedecuesta",
+                lot: "LOT-2026-001",
+                stock: 45,
+                price: 25000,
+                phone: "573001234567",
+                img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 2,
+                name: "Miel Orgánica de Abeja 100% Pura",
+                category: "Agroindustria",
+                producer: "Apícola Piedecuesta - María",
+                location: "Vereda San Lorenzo",
+                lot: "LOT-2026-002",
+                stock: 20,
+                price: 18000,
+                phone: "573101234567",
+                img: "https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 3,
+                name: "Tomate Chonto Fresco de Cosecha",
+                category: "Agrícola",
+                producer: "Huertas Don Juan",
+                location: "Vereda Guatiguará",
+                lot: "LOT-2026-003",
+                stock: 120,
+                price: 4500,
+                phone: "573201234567",
+                img: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 4,
+                name: "Sombrero Tejido Artesanal Piedecuestano",
+                category: "Artesanías",
+                producer: "Artesanías Doña Martha",
+                location: "Centro Histórico",
+                lot: "LOT-2026-004",
+                stock: 10,
+                price: 35000,
+                phone: "573151234567",
+                img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        const defaultCourses = [
+            {
+                id: 1,
+                title: "📱 Módulo 1: Ventas y Atención por WhatsApp Business",
+                desc: "Aprende a configurar tu catálogo en WhatsApp, crear respuestas automáticas y cerrar ventas directamente con tus clientes.",
+                progress: 80,
+                status: "✔ En curso"
+            },
+            {
+                id: 2,
+                title: "🏷️ Módulo 2: Trazabilidad Básica e Inocuidad en SITEC",
+                desc: "Guía práctica sobre cómo registrar lotes de producción, fechas de cosecha y garantizar la calidad de tus productos locales.",
+                progress: 100,
+                status: "🎉 Certificado"
+            },
+            {
+                id: 3,
+                title: "📸 Módulo 3: Fotografía de Productos con Celular",
+                desc: "Consejos sencillos de iluminación y encuadre para tomar fotos atractivas a tus artesanías y productos agrícolas con tu teléfono.",
+                progress: 35,
+                status: "⏳ En progreso"
+            }
+        ];
+
+        const defaultTeam = [
+            {
+                id: 1,
+                name: "John Sebastian Castillo Franco",
+                role: "Rol: Scrum Master (SM)",
+                desc: "Facilitador y líder de seguimiento ágil."
+            },
+            {
+                id: 2,
+                name: "Maricela Merchan Rivera",
+                role: "Rol: Product Owner (PO)",
+                desc: "Gestión de requerimientos y backlog."
+            },
+            {
+                id: 3,
+                name: "Samuel José Bolaño Mejía",
+                role: "Rol: SDT1 (Desarrollador)",
+                desc: "Diseño de bases de datos e interfaces."
+            },
+            {
+                id: 4,
+                name: "Alcides Andres Jaimes Garces",
+                role: "Rol: SDT2 (Desarrollador)",
+                desc: "Soporte frontend e integración web."
+            }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('sitec_products')) || defaultProducts;
+        let courses = JSON.parse(localStorage.getItem('sitec_courses')) || defaultCourses;
+        let team = JSON.parse(localStorage.getItem('sitec_team')) || defaultTeam;
+        let selectedCategory = 'todos';
+        let isAdmin = false;
+
+        function toggleAdmin() {
+            if(!isAdmin) {
+                const pass = prompt("Ingresa la contraseña de administrador:");
+                if(pass === "sitec2026") {
+                    isAdmin = true;
+                    document.body.classList.add('is-admin');
+                    document.getElementById('adminBanner').style.display = 'block';
+                    const adminBtn = document.getElementById('adminBtn');
+                    adminBtn.innerText = '🔓 Salir de Admin';
+                    adminBtn.classList.add('admin-badge-active');
+                    alert("¡Modo Administrador activado!");
+                } else if(pass !== null) {
+                    alert("Contraseña incorrecta.");
+                }
+            } else {
+                isAdmin = false;
+                document.body.classList.remove('is-admin');
+                document.getElementById('adminBanner').style.display = 'none';
+                const adminBtn = document.getElementById('adminBtn');
+                adminBtn.innerText = '🔐 Acceso Admin';
+                adminBtn.classList.remove('admin-badge-active');
+                alert("Has salido del Modo Administrador.");
+            }
+            renderCatalog();
+            renderInventoryTable();
+            renderCourses();
+            renderTeam();
+        }
+
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            if(event) event.target.classList.add('active');
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('catalogGrid');
+            grid.innerHTML = '';
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = products.filter(p => {
+                const matchesCat = selectedCategory === 'todos' || p.category === selectedCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
+                                      p.producer.toLowerCase().includes(searchTerm) || 
+                                      p.location.toLowerCase().includes(searchTerm);
+                return matchesCat && matchesSearch;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No se encontraron productos.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <button class="edit-img-btn ${isAdmin ? 'admin-only' : ''}" title="Cambiar imagen" onclick="editProductImg(${p.id})">✏️</button>
+                    <img src="${p.img}" class="product-img" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80'">
+                    <div class="product-body">
+                        <div>
+                            <div class="product-title">${p.name}</div>
+                            <div class="product-producer">👤 ${p.producer}</div>
+                            <div class="product-meta">
+                                📍 ${p.location}<br>
+                                🔍 <strong>Lote:</strong> ${p.lot} | 📦 Stock: ${p.stock}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="product-price">$${Number(p.price).toLocaleString('es-CO')} COP</div>
+                            <a href="https://wa.me/${p.phone}?text=Hola,%20estoy%20interesado%20en%20comprar%20${encodeURIComponent(p.name)}%20(Lote:%20${p.lot})%20visto%20en%20SITEC." 
+                               target="_blank" class="btn-whatsapp">
+                                💬 Contactar Productor
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderInventoryTable() {
+            const tbody = document.getElementById('inventoryTable');
+            tbody.innerHTML = '';
+
+            products.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${p.lot}</strong></td>
+                    <td>${p.name}</td>
+                    <td>${p.location}</td>
+                    <td>${p.stock} unid.</td>
+                    <td>$${Number(p.price).toLocaleString('es-CO')}</td>
+                    <td class="${isAdmin ? '' : 'admin-only'}">
+                        <button class="btn-action" title="Editar Imagen" onclick="editProductImg(${p.id})">✏️</button>
+                        <button class="btn-action" title="Eliminar" onclick="deleteProduct(${p.id})">🗑️</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderCourses() {
+            const grid = document.getElementById('coursesGrid');
+            grid.innerHTML = '';
+
+            courses.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.innerHTML = `
+                    <button class="delete-course-btn" title="Eliminar capacitación" onclick="deleteCourse(${c.id})">❌</button>
+                    <div>
+                        <div class="course-title">${c.title}</div>
+                        <div class="course-desc">${c.desc}</div>
+                    </div>
+                    <div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${c.progress}%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progreso: ${c.progress}% completado</span>
+                            <span style="color: var(--primary-light);">${c.status}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderTeam() {
+            const grid = document.getElementById('teamGrid');
+            grid.innerHTML = '';
+
+            team.forEach(m => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'team-member';
+                memberCard.innerHTML = `
+                    <button class="edit-team-btn" title="Editar integrante" onclick="editTeamMember(${m.id})">✏️</button>
+                    <strong>${m.name}</strong>
+                    <span>${m.role}</span>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">${m.desc}</p>
+                `;
+                grid.appendChild(memberCard);
+            });
+        }
+
+        function addProduct(e) {
+            e.preventDefault();
+            const rawPhone = document.getElementById('pPhone').value.replace(/\D/g, '');
+            const phoneFormatted = rawPhone.startsWith('57') ? rawPhone : '57' + rawPhone;
+
+            const newProduct = {
+                id: Date.now(),
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCategory').value,
+                producer: document.getElementById('pProducer').value,
+                location: document.getElementById('pLocation').value,
+                lot: document.getElementById('pLot').value,
+                stock: parseInt(document.getElementById('pStock').value),
+                price: parseInt(document.getElementById('pPrice').value),
+                phone: phoneFormatted,
+                img: document.getElementById('pImg').value
+            };
+
+            products.unshift(newProduct);
+            localStorage.setItem('sitec_products', JSON.stringify(products));
+            renderCatalog();
+            renderInventoryTable();
+            document.getElementById('productForm').reset();
+            alert('¡Producto y Lote guardados con éxito!');
+            switchTab('catalog', null);
+        }
+
+        function addCourse(e) {
+            e.preventDefault();
+            if(!isAdmin) return;
+
+            const newCourse = {
+                id: Date.now(),
+                title: document.getElementById('cTitle').value,
+                desc: document.getElementById('cDesc').value,
+                progress: parseInt(document.getElementById('cProgress').value),
+                status: document.getElementById('cStatus').value
+            };
+
+            courses.push(newCourse);
+            localStorage.setItem('sitec_courses', JSON.stringify(courses));
+            renderCourses();
+            document.getElementById('courseForm').reset();
+            alert('¡Capacitación agregada con éxito!');
+        }
+
+        function deleteCourse(id) {
+            if(!isAdmin) return;
+            if(confirm('¿Deseas eliminar esta capacitación?')) {
+                courses = courses.filter(c => c.id !== id);
+                localStorage.setItem('sitec_courses', JSON.stringify(courses));
+                renderCourses();
+            }
+        }
+
+        function editTeamMember(id) {
+            if(!isAdmin) return;
+            const member = team.find(m => m.id === id);
+            if(member) {
+                const newName = prompt("Editar Nombre Completo:", member.name);
+                if(newName !== null && newName.trim() !== "") {
+                    const newRole = prompt("Editar Rol:", member.role);
+                    const newDesc = prompt("Editar Descripción:", member.desc);
+                    
+                    member.name = newName.trim();
+                    if(newRole !== null) member.role = newRole.trim();
+                    if(newDesc !== null) member.desc = newDesc.trim();
+
+                    localStorage.setItem('sitec_team', JSON.stringify(team));
+                    renderTeam();
+                    alert("¡Información del integrante actualizada con éxito!");
+                }
+            }
+        }
+
+        function editProductImg(id) {
+            if(!isAdmin) return;
+            const prod = products.find(p => p.id === id);
+            if(prod) {
+                const newUrl = prompt(`Nueva URL de imagen para "${prod.name}":`, prod.img);
+                if(newUrl && newUrl.trim() !== "") {
+                    prod.img = newUrl.trim();
+                    localStorage.setItem('sitec_products', JSON.stringify(products));
+                    renderCatalog();
+                    renderInventoryTable();
+                }
+            }
+        }
+
+        function deleteProduct(id) {
+            if(!isAdmin) return;
+            if(confirm('¿Eliminar producto?')) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('sitec_products', JSON.stringify(products));
+                renderCatalog();
+                renderInventoryTable();
+            }
+        }
+
+        function clearData() {
+            if(!isAdmin) return;
+            if(confirm('¿Restaurar datos de fábrica?')) {
+                localStorage.clear();
+                products = [...defaultProducts];
+                courses = [...defaultCourses];
+                team = [...defaultTeam];
+                renderCatalog();
+                renderInventoryTable();
+                renderCourses();
+                renderTeam();
+            }
+        }
+
+        function filterCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCatalog();
+        }
+
+        function filterProducts() {
+            renderCatalog();
+        }
+
+        // Inicializar
+        renderCatalog();
+        renderInventoryTable();
+        renderCourses();
+        renderTeam();
+    </script>
+</body>
+</html>
